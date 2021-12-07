@@ -10,7 +10,7 @@ namespace ConsoleApp1
             string[] input = File.ReadAllLines(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input.txt"));
             int[] report = (Array.ConvertAll(input, s => Int32.Parse(s)));
 
-            Console.WriteLine("########## Day 1 2020 ##########");
+            Console.WriteLine("########## Day 1 2021 ##########");
             Console.WriteLine($"Part one solution: {SolvePartOne(report)}");
             Console.WriteLine($"Part two solution: {SolvePartTwo(report)}");
             Console.WriteLine("################################");
