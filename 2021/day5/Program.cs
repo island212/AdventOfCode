@@ -31,7 +31,7 @@ for (int i = 0; i < reports.Length; i++)
     }
 }
 
-Console.WriteLine("########## Day 4 2021 ##########");
+Console.WriteLine("########## Day 5 2021 ##########");
 Console.WriteLine($"Part one solution: {SolvePartOne(lines)}");
 Console.WriteLine($"Part two solution: {SolvePartTwo(lines)}");
 Console.WriteLine("################################");
@@ -47,7 +47,7 @@ static int SolvePartOne(Line[] lines)
             //Horizontal
             for (int j = lines[i].y1; j <= lines[i].y2; j++)
             {
-                Point p = new Point(lines[i].x1, j);
+                var p = new Point(lines[i].x1, j);
                 if (!terrains.TryAdd(p, 1))
                     terrains[p]++;
             }
@@ -57,7 +57,7 @@ static int SolvePartOne(Line[] lines)
             //Vertical
             for (int j = lines[i].x1; j <= lines[i].x2; j++)
             {
-                Point p = new Point(j, lines[i].y1);
+                var p = new Point(j, lines[i].y1);
                 if (!terrains.TryAdd(p, 1))
                     terrains[p]++;
             }
@@ -82,7 +82,7 @@ static int SolvePartTwo(Line[] lines)
             //Horizontal
             for (int j = lines[i].y1; j <= lines[i].y2; j++)
             {
-                Point p = new Point(lines[i].x1, j);
+                var p = new Point(lines[i].x1, j);
                 if (!terrains.TryAdd(p, 1))
                     terrains[p]++;
             }
@@ -92,7 +92,7 @@ static int SolvePartTwo(Line[] lines)
             //Vertical
             for (int j = lines[i].x1; j <= lines[i].x2; j++)
             {
-                Point p = new Point(j, lines[i].y1);
+                var p = new Point(j, lines[i].y1);
                 if (!terrains.TryAdd(p, 1))
                     terrains[p]++;
             }
@@ -103,7 +103,7 @@ static int SolvePartTwo(Line[] lines)
             int increment = lines[i].x1 < lines[i].x2 ? 1 : -1;
             for (int j = lines[i].y1, k=lines[i].x1; j <= lines[i].y2; j++, k+=increment)
             {
-                Point p = new Point(k, j);
+                var p = new Point(k, j);
                 if (!terrains.TryAdd(p, 1))
                     terrains[p]++;
             }
@@ -139,7 +139,7 @@ struct Point
         if (!(obj is Point))
             return false;
 
-        Point p = (Point)obj;
+        var p = (Point)obj;
         return (x == p.x) && (y == p.y);
     }
 }
