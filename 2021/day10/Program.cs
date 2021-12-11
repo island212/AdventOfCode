@@ -88,18 +88,10 @@ static long SolvePartTwo(string[] reports)
             {
                 switch (stack.Pop())
                 {
-                    case '(':
-                        score = score * 5 + 1;
-                        break;
-                    case '[':
-                        score = score * 5 + 2;
-                        break;
-                    case '{':
-                        score = score * 5 + 3;
-                        break;
-                    case '<':
-                        score = score * 5 + 4;
-                        break;
+                    case '(': score = score * 5 + 1; break;
+                    case '[': score = score * 5 + 2; break;
+                    case '{': score = score * 5 + 3; break;
+                    case '<': score = score * 5 + 4; break;
                 }
             }
             scores.Add(score);
