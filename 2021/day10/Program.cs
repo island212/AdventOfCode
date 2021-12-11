@@ -86,13 +86,14 @@ static long SolvePartTwo(string[] reports)
             long score = 0;
             while (stack.Count > 0)
             {
-                switch (stack.Pop())
+                score = 5 * score + stack.Pop() switch
                 {
-                    case '(': score = score * 5 + 1; break;
-                    case '[': score = score * 5 + 2; break;
-                    case '{': score = score * 5 + 3; break;
-                    case '<': score = score * 5 + 4; break;
-                }
+                    '(' => 1,
+                    '[' => 2,
+                    '{' => 3,
+                    '<' => 4,
+                    _ => throw new NotImplementedException()
+                };
             }
             scores.Add(score);
         }       
