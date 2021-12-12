@@ -4,7 +4,7 @@ using System.IO;
 
 var reports = File.ReadAllLines(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input.txt"));
 
-Console.WriteLine("########## Day 9 2021 ##########");
+Console.WriteLine("########## Day 10 2021 ##########");
 Console.WriteLine($"Part one solution: {SolvePartOne(reports)}");
 Console.WriteLine($"Part two solution: {SolvePartTwo(reports)}");
 Console.WriteLine("################################");

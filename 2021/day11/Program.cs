@@ -18,7 +18,7 @@ for (int i = 0; i < reports.Length; i++)
 int[] copyMap = new int[width * height];
 Array.Copy(map, copyMap, map.Length);
 
-Console.WriteLine("########## Day 9 2021 ##########");
+Console.WriteLine("########## Day 11 2021 ##########");
 Console.WriteLine($"Part one solution: {SolvePartOne(width, map)}");
 Console.WriteLine($"Part two solution: {SolvePartTwo(width, copyMap)}");
 Console.WriteLine("################################");
