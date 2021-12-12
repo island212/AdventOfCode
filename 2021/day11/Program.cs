@@ -52,16 +52,11 @@ static long SolvePartTwo(int width, int[] map)
         for (int i = 0; i < map.Length; i++)
             map[i]++;
 
-        ProcessExplosion(width, map);
+        flashCount = ProcessExplosion(width, map);
 
         for (int i = 0; i < map.Length; i++)
-        {
             if (map[i] == -1)
-            {
                 map[i] = 0;
-                flashCount++;
-            }
-        }
     } 
     while (flashCount != map.Length);
 
