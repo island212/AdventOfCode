@@ -1,5 +1,4 @@
-﻿using C5;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,7 +18,7 @@ for (int i = 0; i < reports.Length; i++)
 }
 
 Console.WriteLine("########## Day 15 2021 ##########");
-//Console.WriteLine($"Part one solution: {SolvePartOne(map, width, 0, map.Length - 1)}");
+Console.WriteLine($"Part one solution: {SolvePartOne(map, width, 0, map.Length - 1)}");
 Console.WriteLine($"Part two solution: {SolvePartTwo(map, width, height)}");
 Console.WriteLine("################################");
 
@@ -33,57 +32,47 @@ static int SolvePartOne(int[] map, int width, int start, int goal)
         if (i < map.Length - width) yield return i + width; //Down
     }
 
-    int goalX = goal % width;
-    int goalY = goal / width;
-    int GetManhattanDistance(int i)
+    var dist = new int[map.Length];
+    var prev = new int[map.Length];
+
+    Array.Fill(dist, int.MaxValue / 2);
+    Array.Fill(prev, -1);
+
+    dist[start] = 0;
+
+    var queue = new PriorityQueue<int, int>();
+    queue.Enqueue(start, 0);
+
+    while (queue.TryDequeue(out int element, out int _))
     {
-        return Math.Abs(i % width - goalX) + Math.Abs(i / width - goalY);
-    }
-
-    var cameFrom = new int[map.Length];
-    cameFrom[start] = 0;
-
-    //Implmenting an A* search
-    var openSet = new KeyValueList(map.Length);
-    openSet.Add(GetManhattanDistance(start), start);
-
-    var gScore = new int[map.Length];
-    Array.Fill(gScore, int.MaxValue);
-    gScore[start] = 0;
-
-    var fScore = new int[map.Length];
-    Array.Fill(fScore, int.MaxValue);
-    fScore[start] = GetManhattanDistance(start);
-
-    while (openSet.Count > 0)
-    {
-        int i = openSet.FindMin(out int current);
-        openSet.RemoveAtSwapBack(i);
-        foreach (int neighbor in GetValidNeighbors(current))
+        if (element == goal)
         {
-            int tentative_gScore = gScore[current] + map[neighbor];
-            if (tentative_gScore < gScore[neighbor])
+            //PrintMap(map, prev, width, start, goal);
+            return dist[goal];
+        }
+
+        foreach (var neighbor in GetValidNeighbors(element))
+        {
+            int alt = dist[element] + map[neighbor];
+            if (alt < dist[neighbor])
             {
-                cameFrom[neighbor] = current;
-                gScore[neighbor] = tentative_gScore;
-                fScore[neighbor] = tentative_gScore + GetManhattanDistance(neighbor);
-                if (!openSet.values.Contains(neighbor))
-                    openSet.Add(GetManhattanDistance(neighbor), neighbor);
+                dist[neighbor] = alt;
+                prev[neighbor] = element;
+                queue.Enqueue(neighbor, alt);
             }
         }
     }
-
-    //PrintMap(map, cameFrom, width, start, goal);
-
-    return gScore[goal];
+   
+    return -1;
 }
 
-static long SolvePartTwo(int[] map, int width, int height)
+static int SolvePartTwo(int[] map, int width, int height)
 {
     const int fullSize = 5;
-    const int lineSize = 500;
 
     int newWidth = width * fullSize;
+    int lineSize = fullSize * width * height;
+
     var newMap = new int[map.Length * fullSize * fullSize];
     for (int i = 0; i < newMap.Length; i++)
     {
